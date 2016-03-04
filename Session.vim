@@ -7,11 +7,13 @@ map  h
 map <NL> j_
 map  k_
 map  l
+nnoremap <silent>  :CtrlP
 map  :tabnew
 vmap  "*d
+nnoremap  tt :NERDTreeToggle
 nnoremap  	 <C-6>
 nnoremap  fed :e ~/vimfiles/jab-vimrc.vim
-nnoremap  ff :e 
+nnoremap  ff :e 
 nnoremap  fs :w
 map Q gq
 nmap gx <Plug>NetrwBrowseX
@@ -30,6 +32,7 @@ let &cpo=s:cpo_save
 unlet s:cpo_save
 set background=dark
 set backspace=indent,eol,start
+set balloonexpr=SyntasticBalloonsExprNotifier()
 set clipboard=unnamed
 set encoding=utf-8
 set expandtab
@@ -41,11 +44,13 @@ set history=50
 set hlsearch
 set incsearch
 set ruler
-set runtimepath=~/vimfiles,~\\.vim\\plugged\\molokai,E:\\Public\\Vim/vimfiles,E:\\Public\\Vim\\vim74,E:\\Public\\Vim/vimfiles/after,~/vimfiles/after
+set runtimepath=~/vimfiles,~\\.vim\\plugged\\molokai,~\\.vim\\plugged\\nerdtree,~\\.vim\\plugged\\syntastic,E:\\Public\\Vim/vimfiles,E:\\Public\\Vim\\vim74,E:\\Public\\Vim/vimfiles/after,~/vimfiles/after
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos
 set showtabline=2
+set statusline=%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*
 set tabstop=4
 set visualbell
+set wildignore=*.pyc
 set window=48
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
@@ -55,133 +60,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 jab-vimrc.vim
+badd +17 \git\digitalglobe\main.py
+badd +135 jab-vimrc.vim
+badd +3 \git\digitalglobe\setup.py
 silent! argdel *
 set lines=49 columns=100
-winpos 7 3
+winpos 50 3
 edit jab-vimrc.vim
 set splitbelow splitright
-wincmd _ | wincmd |
-split
-1wincmd k
-wincmd w
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 23 + 24) / 49)
-exe '2resize ' . ((&lines * 23 + 24) / 49)
-argglobal
-edit \Public\Vim\vim74\doc\options.txt
-setlocal keymap=
-setlocal noarabic
-setlocal noautoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal nobuflisted
-setlocal buftype=help
-setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=nc
-setlocal conceallevel=2
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'help'
-setlocal filetype=help
-endif
-setlocal foldcolumn=0
-setlocal nofoldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-set foldmethod=indent
-setlocal foldmethod=indent
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcroql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=!-~,^*,^|,^\",192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal nomodifiable
-setlocal nrformats=octal,hex
-set number
-setlocal nonumber
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal readonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=8
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'help'
-setlocal syntax=help
-endif
-setlocal tabstop=8
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-let s:l = 3138 - ((6 * winheight(0) + 11) / 23)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-3138
-normal! 055|
-wincmd w
 argglobal
 vnoremap <buffer> <silent> [" :exe "normal! gv"|call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
 nnoremap <buffer> <silent> [" :call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
@@ -298,20 +188,25 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 60,60fold
-80,83fold
-97,101fold
-97
+78,89fold
+90,95fold
+96,100fold
+114,114fold
+114,120fold
+113,120fold
+134,140fold
+113
 normal! zo
-let s:l = 97 - ((6 * winheight(0) + 11) / 23)
+114
+normal! zo
+134
+normal! zo
+let s:l = 114 - ((44 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-97
+114
 normal! 0
-wincmd w
-2wincmd w
-exe '1resize ' . ((&lines * 23 + 24) / 49)
-exe '2resize ' . ((&lines * 23 + 24) / 49)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

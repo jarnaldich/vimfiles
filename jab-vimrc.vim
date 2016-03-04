@@ -4,6 +4,7 @@
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+set foldmethod=manual
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -76,30 +77,29 @@ set clipboard=unnamed
 
 " Working with tabs
 if version >= 700
-        " always enable Vim tabs
-        set showtabline=2
-        " set tab features just like browser
-        " open tab, close tab, next tab, previous tab (just like Chrome and Firefox keyboard shortcuts)
-      map <C-t> <Esc>:tabnew<CR>
-      map <C-F4> <Esc>:tabclose<CR>
-      map <C-Tab> <Esc>:tabnext<CR>
-      map <C-S-Tab> <Esc>:tabprev<CR>
+    " always enable Vim tabs
+    set showtabline=2
+    " set tab features just like browser
+    " open tab, close tab, next tab, previous tab 
+    " (just like Chrome and Firefox keyboard shortcuts)
+    map <C-t> <Esc>:tabnew<CR>
+    map <C-F4> <Esc>:tabclose<CR>
+    map <C-Tab> <Esc>:tabnext<CR>
+    map <C-S-Tab> <Esc>:tabprev<CR>
 endif
-
-" Switch between splits very fast (for multi-file editing) by maximizing target split 
-    map <C-J> <C-W>j<C-W>_
-    map <C-K> <C-W>k<C-W>_
-    map <C-H> <C-W>h<C-W>|
-    map <C-L> <C-W>l<C-W>|
-    map <C-=> <C-W>=
-
+" Splits 
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-H> <C-W>h<C-W>|
+map <C-L> <C-W>l<C-W>|
+map <C-=> <C-W>=
 " Session options 
 set sessionoptions+=resize
 set sessionoptions+=winpos
 set sessionoptions+=folds
 set sessionoptions+=tabpages
 
-" Always change the directory to working directory of file in current buffer 
+" Change the directory to working directory of file in current buffer 
 " http://vim.wikia.com/wiki/VimTip64
 autocmd BufEnter * call CHANGE_CURR_DIR()
 function! CHANGE_CURR_DIR()
@@ -110,11 +110,35 @@ endfunction
 
 set encoding=utf-8 " Default encoding
 
-" Plug !
+" Plug 
 call plug#begin('~/.vim/plugged')
     Plug 'tomasr/molokai'
     Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/syntastic'
+    Plug 'kien/ctrlp.vim'
+    Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
 colorscheme molokai 
 set lines=100 
@@ -123,8 +147,8 @@ set columns=100
 " Leader key. Try to mimick spacemacs rocks!
 let mapleader="\<Space>"
 nnoremap <Leader>fs :w<CR>
-nnoremap <Leader>ff :e <C-p>
+nnoremap <Leader>ff :e 
 nnoremap <Leader>fed :e ~/vimfiles/jab-vimrc.vim<CR>
 nnoremap <Leader><Tab> <C-6>
-
+nnoremap <Leader>tt :NERDTreeToggle<CR>
 
