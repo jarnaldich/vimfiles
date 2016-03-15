@@ -2,31 +2,49 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <silent> <C-Tab> =UltiSnips#ListSnippets()
 map! <S-Insert> *
 map  h
+xnoremap <silent> 	 :call UltiSnips#SaveLastVisualSelection()gvs
+snoremap <silent> 	 :call UltiSnips#ExpandSnippet()
 map <NL> j_
 map  k_
 map  l
 nnoremap <silent>  :CtrlP
+snoremap  "_c
 map  :tabnew
 vmap  "*d
+nnoremap    :CtrlPMixed
+nnoremap  wc 
+nnoremap  ws 
+nnoremap  ww 
+nnoremap  sf :so Session.vim
+nnoremap  ss :mksession!
+nnoremap  ep :lprev
+nnoremap  en :lnext
+nnoremap  bd :bdelete
 nnoremap  tt :NERDTreeToggle
-nnoremap  	 <C-6>
+nnoremap  	 
 nnoremap  fed :e ~/vimfiles/jab-vimrc.vim
 nnoremap  ff :e 
 nnoremap  fs :w
-map Q gq
+map Q gq " Don't use Ex mode, use Q for formatting
 nmap gx <Plug>NetrwBrowseX
+map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
+map <C-Tab> :tabnext
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
+snoremap <silent> <Del> c
+snoremap <silent> <BS> c
+nnoremap <SNR>34_: :=v:count ? v:count : ''
 map <C-=> =
 map <C-S-Tab> :tabprev
-map <C-Tab> :tabnext
 map <C-F4> :tabclose
 vmap <C-Del> "*d
 vmap <S-Del> "*d
 vmap <C-Insert> "*y
 vmap <S-Insert> "-d"*P
 nmap <S-Insert> "*P
+inoremap <silent> 	 =UltiSnips#ExpandSnippet()
 inoremap  u
 let &cpo=s:cpo_save
 unlet s:cpo_save
@@ -38,20 +56,21 @@ set encoding=utf-8
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set guifont=DejaVu\ Sans\ Mono:h12
-set guioptions=egrLt
+set guioptions=egt
 set helplang=Ca
+set hidden
 set history=50
 set hlsearch
 set incsearch
 set ruler
-set runtimepath=~/vimfiles,~\\.vim\\plugged\\molokai,~\\.vim\\plugged\\nerdtree,~\\.vim\\plugged\\syntastic,E:\\Public\\Vim/vimfiles,E:\\Public\\Vim\\vim74,E:\\Public\\Vim/vimfiles/after,~/vimfiles/after
+set runtimepath=~/vimfiles,~\\.vim\\plugged\\molokai,~\\.vim\\plugged\\syntastic,~\\.vim\\plugged\\ctrlp.vim,~\\.vim\\plugged\\vim-fugitive,~\\.vim\\plugged\\ultisnips,E:\\Public\\Vim/vimfiles,E:\\Public\\Vim\\vim74,E:\\Public\\Vim/vimfiles/after,~\\.vim\\plugged\\ultisnips\\after,~/vimfiles/after
 set sessionoptions=blank,buffers,curdir,folds,help,options,tabpages,winsize,resize,winpos
 set showtabline=2
-set statusline=%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*
+set statusline=%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*%#warningmsg#%{SyntasticStatuslineFlag()}%*
 set tabstop=4
 set visualbell
-set wildignore=*.pyc
-set window=48
+set wildignore=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.*~
+set window=41
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -60,12 +79,28 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +17 \git\digitalglobe\main.py
-badd +135 jab-vimrc.vim
-badd +3 \git\digitalglobe\setup.py
+badd +14 \temp\ungeotiff.py
+badd +11 UltiSnips\python.snippets
+badd +115 \git2\orthoenvironment_v2\lib\utilities\tiffs.py
+badd +45 \temp\gdal_edit.py
+badd +3 \git2\orthoenvironment_v2\lib\utilities\.gitignore
+badd +140 jab-vimrc.vim
+badd +24 \git\digitalglobe\errors.sql
+badd +16 \git\digitalglobe\model\products_qc_view.py
+badd +16 \git\digitalglobe\create_db.py
+badd +21 \git\digitalglobe\model\digitalglobe_order_views.py
+badd +41 \git\digitalglobe\model\cq_views.py
+badd +63 \git\digitalglobe\model\config.py
+badd +19 \git\digitalglobe\model\cq_annotation.py
+badd +79 \git\digitalglobe\model\product.py
+badd +1 \git2\orthoenvironment_v2\lib\utilities\app_base.py
+badd +5 \git\digitalglobe\rebuild_db.bat
+badd +33 \git\dbtool\dbtool.rkt
+badd +1 \git\digitalglobe\model\rebuild_db.bat
+badd +59 \git\digitalglobe\main.py
 silent! argdel *
-set lines=49 columns=100
-winpos 50 3
+set lines=42 columns=153
+winpos 78 16
 edit jab-vimrc.vim
 set splitbelow splitright
 set nosplitbelow
@@ -118,18 +153,20 @@ setlocal expandtab
 if &filetype != 'vim'
 setlocal filetype=vim
 endif
-setlocal foldcolumn=0
+set foldcolumn=3
+setlocal foldcolumn=3
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
 setlocal foldlevel=0
 setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
+set foldmethod=marker
+setlocal foldmethod=marker
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
@@ -139,7 +176,7 @@ setlocal includeexpr=
 setlocal indentexpr=GetVimIndent()
 setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,#
+setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
@@ -186,27 +223,22 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-silent! normal! zE
-60,60fold
-78,89fold
-90,95fold
-96,100fold
-114,114fold
-114,120fold
-113,120fold
-134,140fold
-113
+108
 normal! zo
-114
+131
 normal! zo
-134
+150
 normal! zo
-let s:l = 114 - ((44 * winheight(0) + 24) / 48)
+161
+normal! zo
+183
+normal! zo
+let s:l = 206 - ((37 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-114
-normal! 0
+206
+normal! 030|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
