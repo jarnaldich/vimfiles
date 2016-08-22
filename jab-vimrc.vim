@@ -119,8 +119,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
 "  Plug 'honza/vim-snippets'
     Plug 'sirver/ultisnips'
+    Plug 'julialang/julia-vim'
+    Plug 'raichoo/purescript-vim'
+    Plug 'frigoeu/psc-ide-vim'
 call plug#end()
 "}}}
+"
+"Purescript Syntax checking
+let g:psc_ide_syntastic_mode=2 
+
 " Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -149,7 +156,6 @@ let g:ctrlp_custom_ignore =  {
                         \    }
 
 "}}}
-
 " UltiSnips{{{
 let g:UltiSnipsExpandTrigger="<tab>"
 " If you want :UltiSnipsEdit to split your window.
