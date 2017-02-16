@@ -112,6 +112,7 @@ endfunction
 " Plug {{{
 call plug#begin('~/.vim/plugged')
     Plug 'tomasr/molokai'
+    Plug 'kalafut/vim-taskjuggler'
     " Try to get used to netrw first...
 "    Plug 'scrooloose/nerdtree' 
     Plug 'scrooloose/syntastic'
@@ -137,6 +138,8 @@ set statusline+=%*
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:pymode_lint_on_write = 0
+let g:syntastic_python_checkers = ["pyflakes"]
 " }}}
 " CtrlP{{{
 let g:ctrlp_map = '<c-p>'
@@ -192,6 +195,7 @@ map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 
 " Leader key {{{
 let mapleader="\<Space>"
+nnoremap <Leader>qq :wq<CR>
 nnoremap <Leader>fs :w<CR>
 nnoremap <Leader>ff :e 
 nnoremap <Leader>fed :e ~/vimfiles/jab-vimrc.vim<CR>
@@ -214,7 +218,18 @@ nnoremap <Leader><Tab> <C-^>
 nnoremap <Leader><Leader> :CtrlPMixed<CR>
 nnoremap <Leader>bb :CtrlPBuffer<CR>
 nnoremap <Leader>ff :CtrlP<CR>
+
+nnoremap <Leader>foe :e e:/git/orthoenvironment/lib<CR>
+nnoremap <Leader>fopy :e e:/git/orthoenvironment/lib/orthopy<CR>
+nnoremap <Leader>fopr :e e:/git/orthoenvironment/lib/orthoprocess<CR>
+nnoremap <Leader>fopl :e e:/git/orthoenvironment/lib/ICC/plugin<CR>
+
 "}}}
 
 " After this, pressing gg=G in a xml buffer, will reindent it
 au FileType xml setlocal equalprg=e:\Soft\xmltools\xmllint\ --format\ --recover\ -
+au FileType py setlocal foldmethod=indent
+
+" Write 3 + 2= , place cursor on 3, press Q and gets replaced by the
+" expression
+nnoremap Q yt=A<C-r>=<C-r>"<CR><Esc>
