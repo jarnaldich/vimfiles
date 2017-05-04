@@ -108,6 +108,19 @@ function! CHANGE_CURR_DIR()
         unlet _dir
 endfunction
 
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  if has('win32')
+"    let _autoload = expand('~\.vim\autoload')
+"    exec "cmd /C mkdir " . _autoload 
+"    !powershell -Command "(Invoke-WebRequest -Uri \"https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim).Content | Out-File -encoding \"utf8\" " + _autoload + "\\plug.vim"
+"\""
+"  else
+"    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  endif
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
+
 " Plugin Configuration{{{
 " Plug {{{
 call plug#begin('~/.vim/plugged')
@@ -123,6 +136,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'julialang/julia-vim'
     Plug 'raichoo/purescript-vim'
     Plug 'frigoeu/psc-ide-vim'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'PProvost/vim-ps1'
 call plug#end()
 "}}}
 "
@@ -168,6 +184,15 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/plugged/vim-snippets/UltiSnips']
 
 "}}}
+
+" EasyAlign{{{
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+" }}}
+
 "}}}
 
 " GUI options{{{
@@ -219,10 +244,10 @@ nnoremap <Leader><Leader> :CtrlPMixed<CR>
 nnoremap <Leader>bb :CtrlPBuffer<CR>
 nnoremap <Leader>ff :CtrlP<CR>
 
-nnoremap <Leader>foe :e e:/git/orthoenvironment/lib<CR>
-nnoremap <Leader>fopy :e e:/git/orthoenvironment/lib/orthopy<CR>
-nnoremap <Leader>fopr :e e:/git/orthoenvironment/lib/orthoprocess<CR>
-nnoremap <Leader>fopl :e e:/git/orthoenvironment/lib/ICC/plugin<CR>
+nnoremap <Leader>foe :e e:/git/pyrepo/lib<CR>
+nnoremap <Leader>fopy :e e:/git/pyrepo/lib/orthopy<CR>
+nnoremap <Leader>fopr :e e:/git/pyrepo/lib/orthoprocess<CR>
+nnoremap <Leader>fpow :e C:/Users/j.arnaldich/Documents/WindowsPowerShell<CR>
 
 "}}}
 
